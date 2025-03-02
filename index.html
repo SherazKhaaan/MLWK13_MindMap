@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Discriminative Neural Networks Mind Map</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f8f9fa;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .mindmap {
+      position: relative;
+      width: 1200px;
+      height: 900px;
+      margin: 20px 0;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .node {
+      position: absolute;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      font-weight: bold;
+    }
+    .node:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    /* Colors */
+    .red {
+      background-color: #ffcccc;
+      border: 2px solid #e60000;
+      color: #990000;
+    }
+    .blue {
+      background-color: #cce5ff;
+      border: 2px solid #0066cc;
+      color: #004080;
+    }
+    .green {
+      background-color: #ccffcc;
+      border: 2px solid #00cc00;
+      color: #006600;
+      font-weight: normal;
+    }
+    /* Info panel styles */
+    #infoPanel {
+      width: 1200px;
+      min-height: 150px;
+      padding: 15px;
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: none;
+    }
+    .infoTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 10px;
+      color: #333;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    .infoContent {
+      line-height: 1.5;
+    }
+    /* Legend */
+    .legend {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+    }
+    .legendItem {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .legendBox {
+      width: 20px;
+      height: 20px;
+      border-radius: 4px;
+    }
+    line {
+      stroke: #999;
+      stroke-width: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Discriminative Neural Networks</h1>
+    
+    <div class="mindmap" id="mindmap">
+      <!-- SVG for connecting lines -->
+      <svg width="1600" height="1200" style="position: absolute; top: 0; left: 0;">
+        <!-- Lines from central node (red) to Blue Nodes -->
+        <!-- Central node center at (600,450) -->
+        <line x1="600" y1="450" x2="175" y2="75" />     <!-- Blue Node 1 (NN Refresher) -->
+        <line x1="600" y1="450" x2="1025" y2="75" />    <!-- Blue Node 2 (Deep NN) -->
+        <line x1="600" y1="450" x2="1175" y2="425" />    <!-- Blue Node 3 (Loss Functions) -->
+        <line x1="600" y1="450" x2="1025" y2="675" />    <!-- Blue Node 4 (Convolutional Nets) -->
+        <line x1="600" y1="450" x2="175" y2="675" />     <!-- Blue Node 5 (Residual & BN) -->
+        
+        <!-- Lines from Blue Node 1 to its green nodes -->
+        <line x1="175" y1="75" x2="150" y2="150" />      <!-- Single-Layer Networks -->
+        <line x1="175" y1="75" x2="150" y2="210" />      <!-- ReLU Activation -->
+        <line x1="175" y1="75" x2="150" y2="270" />      <!-- Hidden Units & Formulation -->
+        <line x1="175" y1="75" x2="150" y2="330" />      <!-- Matrix Notation -->
+        
+        <!-- Lines from Blue Node 2 to its green nodes -->
+        <line x1="1025" y1="75" x2="1010" y2="150" />    <!-- Network Composition -->
+        <line x1="1025" y1="75" x2="1010" y2="210" />    <!-- Deep vs Shallow -->
+        <line x1="1025" y1="75" x2="1010" y2="270" />    <!-- Layer Notation & Hyperparameters -->
+        <line x1="1025" y1="75" x2="1010" y2="330" />    <!-- Increased Expressive Power -->
+        
+        <!-- Lines from Blue Node 3 to its green nodes -->
+        <line x1="1175" y1="425" x2="1160" y2="490" />   <!-- Regression Loss (Normal) -->
+        <line x1="1175" y1="425" x2="1160" y2="550" />   <!-- Binary Classification (BCE) -->
+        <line x1="1175" y1="425" x2="1160" y2="610" />   <!-- Multiclass Loss (Softmax) -->
+        
+        <!-- Lines from Blue Node 4 to its green nodes -->
+        <line x1="1025" y1="675" x2="1010" y2="740" />   <!-- Convolutional Layers -->
+        <line x1="1025" y1="675" x2="1010" y2="800" />   <!-- Padding, Stride, Pooling -->
+        <line x1="1025" y1="675" x2="1010" y2="860" />   <!-- Channels & Receptive Field -->
+        
+        <!-- Lines from Blue Node 5 to its green nodes -->
+        <line x1="175" y1="675" x2="160" y2="740" />     <!-- Residual Connections & Blocks -->
+        <line x1="175" y1="675" x2="160" y2="800" />     <!-- Exploding Gradients & Init -->
+        <line x1="175" y1="675" x2="160" y2="860" />     <!-- Batch Normalization -->
+      </svg>
+      
+      <!-- Central Red Node -->
+      <div class="node red" style="width: 250px; top: 425px; left: 475px;" 
+           onclick="showInfo('Discriminative Neural Networks', '&lt;ul&gt;&lt;li&gt;Overview of neural network architectures and deep learning methods.&lt;/li&gt;&lt;/ul&gt;')">
+        Discriminative Neural Networks
+      </div>
+      
+      <!-- Blue Node 1: Neural Network Refresher -->
+      <div class="node blue" style="width: 250px; top: 20px; left: 50px;" 
+           onclick="showInfo('Neural Network Refresher', '&lt;ul&gt;&lt;li&gt;Single-layer networks: Map inputs to outputs.&lt;/li&gt;&lt;li&gt;ReLU activation introduces nonlinearity.&lt;/li&gt;&lt;li&gt;Hidden units form piecewise linear functions.&lt;/li&gt;&lt;li&gt;Matrix notation for compact representation.&lt;/li&gt;&lt;/ul&gt;')">
+        Neural Network Refresher
+      </div>
+      <!-- Green Nodes under Blue Node 1 -->
+      <div class="node green" style="width: 220px; top: 110px; left: 50px;" 
+           onclick="showInfo('Single-layer Networks', '&lt;ul&gt;&lt;li&gt;Compute linear functions and pass through an activation.&lt;/li&gt;&lt;/ul&gt;')">
+        Single-layer Networks
+      </div>
+      <div class="node green" style="width: 220px; top: 170px; left: 50px;" 
+           onclick="showInfo('ReLU Activation', '&lt;ul&gt;&lt;li&gt;ReLU: f(z)=max(0,z), introduces piecewise linearity.&lt;/li&gt;&lt;/ul&gt;')">
+        ReLU Activation
+      </div>
+      <div class="node green" style="width: 220px; top: 230px; left: 50px;" 
+           onclick="showInfo('Hidden Units &amp; Formulation', '&lt;ul&gt;&lt;li&gt;Hidden units (h1, h2, …) form the basis of network capacity.&lt;/li&gt;&lt;/ul&gt;')">
+        Hidden Units &amp; Formulation
+      </div>
+      <div class="node green" style="width: 220px; top: 290px; left: 50px;" 
+           onclick="showInfo('Matrix Notation', '&lt;ul&gt;&lt;li&gt;Represents network computations in compact form.&lt;/li&gt;&lt;/ul&gt;')">
+        Matrix Notation
+      </div>
+      
+      <!-- Blue Node 2: Deep Neural Networks -->
+      <div class="node blue" style="width: 250px; top: 20px; left: 900px;" 
+           onclick="showInfo('Deep Neural Networks', '&lt;ul&gt;&lt;li&gt;Compose multiple layers for complex functions.&lt;/li&gt;&lt;li&gt;Deep vs. shallow: Increased capacity with depth.&lt;/li&gt;&lt;li&gt;Layer notation and hyperparameters define network architecture.&lt;/li&gt;&lt;/ul&gt;')">
+        Deep Neural Networks
+      </div>
+      <!-- Green Nodes under Blue Node 2 -->
+      <div class="node green" style="width: 220px; top: 110px; left: 900px;" 
+           onclick="showInfo('Network Composition', '&lt;ul&gt;&lt;li&gt;Compose single-layer networks to form deep architectures.&lt;/li&gt;&lt;/ul&gt;')">
+        Network Composition
+      </div>
+      <div class="node green" style="width: 220px; top: 170px; left: 900px;" 
+           onclick="showInfo('Deep vs. Shallow', '&lt;ul&gt;&lt;li&gt;Deep networks use fewer parameters per linear region.&lt;/li&gt;&lt;/ul&gt;')">
+        Deep vs. Shallow
+      </div>
+      <div class="node green" style="width: 220px; top: 230px; left: 900px;" 
+           onclick="showInfo('Layer Notation &amp; Hyperparameters', '&lt;ul&gt;&lt;li&gt;Notation: K layers, D1,...,DK hidden units.&lt;/li&gt;&lt;/ul&gt;')">
+        Layer Notation &amp; Hyperparameters
+      </div>
+      <div class="node green" style="width: 220px; top: 290px; left: 900px;" 
+           onclick="showInfo('Increased Expressive Power', '&lt;ul&gt;&lt;li&gt;Deep networks can approximate complex functions with many linear regions.&lt;/li&gt;&lt;/ul&gt;')">
+        Increased Expressive Power
+      </div>
+      
+      <!-- Blue Node 3: Loss Functions -->
+      <div class="node blue" style="width: 250px; top: 350px; left: 1050px;" 
+           onclick="showInfo('Loss Functions', '&lt;ul&gt;&lt;li&gt;Train networks via maximum likelihood.&lt;/li&gt;&lt;li&gt;Regression: Negative log-likelihood for normal distribution.&lt;/li&gt;&lt;li&gt;Classification: Binary (BCE) and multiclass (softmax &amp; cross-entropy).&lt;/li&gt;&lt;/ul&gt;')">
+        Loss Functions
+      </div>
+      <!-- Green Nodes under Blue Node 3 -->
+      <div class="node green" style="width: 220px; top: 470px; left: 1050px;" 
+           onclick="showInfo('Regression Loss (Normal)', '&lt;ul&gt;&lt;li&gt;Univariate regression using normal distribution and NLL loss.&lt;/li&gt;&lt;/ul&gt;')">
+        Regression Loss (Normal)
+      </div>
+      <div class="node green" style="width: 220px; top: 530px; left: 1050px;" 
+           onclick="showInfo('Binary Classification (BCE)', '&lt;ul&gt;&lt;li&gt;Bernoulli distribution, logistic sigmoid, and binary cross-entropy loss.&lt;/li&gt;&lt;/ul&gt;')">
+        Binary Classification (BCE)
+      </div>
+      <div class="node green" style="width: 220px; top: 590px; left: 1050px;" 
+           onclick="showInfo('Multiclass Loss (Softmax)', '&lt;ul&gt;&lt;li&gt;Categorical distribution with softmax and cross-entropy loss.&lt;/li&gt;&lt;/ul&gt;')">
+        Multiclass Loss (Softmax)
+      </div>
+      
+      <!-- Blue Node 4: Convolutional Networks -->
+      <div class="node blue" style="width: 250px; top: 650px; left: 900px;" 
+           onclick="showInfo('Convolutional Networks', '&lt;ul&gt;&lt;li&gt;Designed for high-dimensional image data.&lt;/li&gt;&lt;li&gt;Leverage convolutional layers for local processing.&lt;/li&gt;&lt;li&gt;Incorporate invariance, padding, stride, pooling, and channels.&lt;/li&gt;&lt;/ul&gt;')">
+        Convolutional Networks
+      </div>
+      <!-- Green Nodes under Blue Node 4 -->
+      <div class="node green" style="width: 220px; top: 720px; left: 900px;" 
+           onclick="showInfo('Convolutional Layers', '&lt;ul&gt;&lt;li&gt;Apply convolution operations using kernels and shared weights.&lt;/li&gt;&lt;/ul&gt;')">
+        Convolutional Layers
+      </div>
+      <div class="node green" style="width: 220px; top: 780px; left: 900px;" 
+           onclick="showInfo('Padding, Stride, Pooling', '&lt;ul&gt;&lt;li&gt;Handle boundary conditions and down/up-sampling.&lt;/li&gt;&lt;/ul&gt;')">
+        Padding, Stride, Pooling
+      </div>
+      <div class="node green" style="width: 220px; top: 840px; left: 900px;" 
+           onclick="showInfo('Channels &amp; Receptive Field', '&lt;ul&gt;&lt;li&gt;Multiple feature maps and increasing receptive field over layers.&lt;/li&gt;&lt;/ul&gt;')">
+        Channels &amp; Receptive Field
+      </div>
+      
+      <!-- Blue Node 5: Residual Networks & Batch Normalization -->
+      <div class="node blue" style="width: 250px; top: 650px; left: 50px;" 
+           onclick="showInfo('Residual Networks &amp; Batch Normalization', '&lt;ul&gt;&lt;li&gt;Residual (skip) connections allow training of deeper networks.&lt;/li&gt;&lt;li&gt;Address exploding/vanishing gradients.&lt;/li&gt;&lt;li&gt;Batch normalization stabilizes training by standardizing activations.&lt;/li&gt;&lt;/ul&gt;')">
+        Residual Networks &amp; BN
+      </div>
+      <!-- Green Nodes under Blue Node 5 -->
+      <div class="node green" style="width: 220px; top: 720px; left: 50px;" 
+           onclick="showInfo('Residual Connections &amp; Blocks', '&lt;ul&gt;&lt;li&gt;Skip connections add the input to processed output.&lt;/li&gt;&lt;/ul&gt;')">
+        Residual Connections &amp; Blocks
+      </div>
+      <div class="node green" style="width: 220px; top: 780px; left: 50px;" 
+           onclick="showInfo('Exploding Gradients &amp; Initialization', '&lt;ul&gt;&lt;li&gt;Proper initialization helps prevent exploding gradients in deep networks.&lt;/li&gt;&lt;/ul&gt;')">
+        Exploding Gradients &amp; Init
+      </div>
+      <div class="node green" style="width: 220px; top: 840px; left: 50px;" 
+           onclick="showInfo('Batch Normalization', '&lt;ul&gt;&lt;li&gt;BN standardizes layer outputs using learned scales and shifts.&lt;/li&gt;&lt;/ul&gt;')">
+        Batch Normalization
+      </div>
+      
+    </div>
+    
+    <!-- Information Panel -->
+    <div id="infoPanel">
+      <div class="infoTitle" id="infoTitle">Click on a concept to see details</div>
+      <div class="infoContent" id="infoContent">
+        Select any node in the mind map to display detailed information about that concept.
+      </div>
+    </div>
+    
+    <!-- Legend -->
+    <div class="legend">
+      <div class="legendItem">
+        <div class="legendBox red"></div>
+        <span>Big Picture Concepts</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox blue"></div>
+        <span>Major Categories</span>
+      </div>
+      <div class="legendItem">
+        <div class="legendBox green"></div>
+        <span>Components &amp; Details</span>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function showInfo(title, content) {
+      document.getElementById("infoPanel").style.display = "block";
+      document.getElementById("infoTitle").textContent = title;
+      document.getElementById("infoContent").innerHTML = content;
+    }
+  </script>
+</body>
+</html>
